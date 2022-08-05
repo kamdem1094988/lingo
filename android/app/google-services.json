@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "567332270780",
+    "firebase_url": "https://lingo-efd2f-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "lingo-efd2f",
+    "storage_bucket": "lingo-efd2f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:567332270780:android:9e8bd79d6d2d4a9ec916b9",
+        "android_client_info": {
+          "package_name": "com.lingo.lingo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "567332270780-lbqlgc55o50jteepllg1bu3dvmmksq18.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsoYExvXFj0qDfGb_NeIlp1xPSD-xMNGs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "567332270780-lbqlgc55o50jteepllg1bu3dvmmksq18.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
