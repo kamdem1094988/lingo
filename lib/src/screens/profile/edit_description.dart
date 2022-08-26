@@ -5,12 +5,14 @@ import '../../shared/widget/appbar.dart';
 
 // This class handles the Page to edit the About Me Section of the User Profile.
 class EditDescriptionFormPage extends StatefulWidget {
+  const EditDescriptionFormPage({Key? key}) : super(key: key);
+
   @override
-  _EditDescriptionFormPageState createState() =>
-      _EditDescriptionFormPageState();
+  EditDescriptionFormPageState createState() =>
+      EditDescriptionFormPageState();
 }
 
-class _EditDescriptionFormPageState extends State<EditDescriptionFormPage> {
+class EditDescriptionFormPageState extends State<EditDescriptionFormPage> {
   final _formKey = GlobalKey<FormState>();
   final descriptionController = TextEditingController();
   var user = UserData.myUser;
@@ -35,15 +37,15 @@ class _EditDescriptionFormPageState extends State<EditDescriptionFormPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                SizedBox(
+                const SizedBox(
                     width: 350,
-                    child: const Text(
+                    child:  Text(
                       "What type of passenger\nare you?",
                       style:
                       TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     )),
                 Padding(
-                    padding: EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(20),
                     child: SizedBox(
                         height: 250,
                         width: 350,
@@ -68,7 +70,7 @@ class _EditDescriptionFormPageState extends State<EditDescriptionFormPage> {
                               'Write a little bit about yourself. Do you like chatting? Are you a smoker? Do you bring pets with you? Etc.'),
                         ))),
                 Padding(
-                    padding: EdgeInsets.only(top: 50),
+                    padding: const EdgeInsets.only(top: 50),
                     child: Align(
                         alignment: Alignment.bottomCenter,
                         child: SizedBox(

@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:lingo/src/screens/sign_up.dart';
+import 'package:provider/provider.dart';
+
+import '../services/firebase_auth_methods.dart';
 
 enum RememberQ { yes, no }
 
 class LoginScreen extends StatefulWidget {
-  static const routeName = '/login';
+  static const routeName = '/login-email-password';
 
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -12,7 +16,19 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  void loginUser() {
+    context.read<FirebaseAuthMethods>().loginWithEmail(
+          email: emailController.text,
+          password: passwordController.text,
+          context: context,
+        );
+  }
+
   RememberQ? _question = RememberQ.no;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,10 +58,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 Expanded(
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.purple,
                       padding: const EdgeInsets.all(5),
                     ),
-                    onPressed: null,
+                    onPressed: (){
+                      context.read<FirebaseAuthMethods>().signInWithFacebook(context);
+                    },
                     child: Image.asset(
                       'assets/images/fb_btn.png',
                       height: 50,
@@ -59,10 +76,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 Expanded(
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.purple,
                         padding: const EdgeInsets.all(5),
                       ),
-                      onPressed: null,
+                      onPressed: (){
+                        context.read<FirebaseAuthMethods>().signInWithGoogle(context);
+                      },
                       child: Image.asset(
                         'assets/images/google_btn.png',
                         height: 50,
@@ -81,6 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 10,
             ),
             TextFormField(
+              controller: emailController,
               maxLines: 1,
               decoration: InputDecoration(
                   hintText: 'Email',
@@ -91,6 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 10,
             ),
             TextFormField(
+              controller: passwordController,
               maxLines: 1,
               decoration: InputDecoration(
                   hintText: 'Password',
@@ -127,7 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   primary: Colors.blue,
                   padding: const EdgeInsets.all(5),
                 ),
-                onPressed: () {},
+                onPressed: loginUser,
                 child: const Text('Login'),
               ),
             ),
@@ -135,14 +155,18 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 10,
             ),
             Row(
-              children: const [
-                Text('Don\'t have an account ?'),
-                SizedBox(
+              children: [
+                const Text('Don\'t have an account ?'),
+                const SizedBox(
                   width: 10,
                 ),
-                Text(
-                  'Login',
-                  style: TextStyle(color: Colors.blue),
+                TextButton(
+                  onPressed: () => Navigator.of(context)
+                      .popAndPushNamed(SignUpScreen.routeName),
+                  child: const Text(
+                    'Sign Up',
+                    style: TextStyle(color: Colors.blue),
+                  ),
                 )
               ],
             ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lingo/src/screens/choose_spec.dart';
 
 class ChooseLevelScreen extends StatefulWidget {
   static const routeName = '/choose-level';
@@ -29,7 +30,7 @@ class _ChooseLevelScreenState extends State<ChooseLevelScreen> {
                   value: dropDownValue,
                   elevation: 16,
                   onChanged: (String? newValue) {
-                    print(newValue);
+                    debugPrint(newValue);
                     setState(() {
                       dropDownValue = newValue!;
                     });
@@ -50,7 +51,7 @@ class _ChooseLevelScreenState extends State<ChooseLevelScreen> {
                     primary: Colors.blue,
                     padding: const EdgeInsets.all(5),
                   ),
-                  onPressed: () {},
+                  onPressed: () => Navigator.of(context).pushNamed(ChooseSpecialisationScreen.routeName),
                   child: const Text('Next'),
                 ),
               ),

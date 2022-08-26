@@ -28,7 +28,7 @@ class _ChooseSpecialisationScreenState extends State<ChooseSpecialisationScreen>
                   value: dropDownValue,
                   elevation: 16,
                   onChanged: (String? newValue) {
-                    print(newValue);
+                    debugPrint(newValue);
                     setState(() {
                       dropDownValue = newValue!;
                     });
@@ -49,7 +49,7 @@ class _ChooseSpecialisationScreenState extends State<ChooseSpecialisationScreen>
                     primary: Colors.blue,
                     padding: const EdgeInsets.all(5),
                   ),
-                  onPressed: () {},
+                  onPressed: () => Navigator.of(context).pushReplacementNamed('/'),
                   child: const Text('Next'),
                 ),
               ),

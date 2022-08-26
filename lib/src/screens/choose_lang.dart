@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lingo/src/screens/choose_level.dart';
 
 class ChooseLanguageScreen extends StatefulWidget {
   static const routeName = '/choose-language';
@@ -30,7 +31,7 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
                   value: dropdownValue,
                   elevation: 16,
                   onChanged: (String? newValue) {
-                    print(newValue);
+                    debugPrint(newValue);
                     setState(() {
                       dropdownValue = newValue!;
                     });
@@ -51,7 +52,7 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
                     primary: Colors.blue,
                     padding: const EdgeInsets.all(5),
                   ),
-                  onPressed: () {},
+                  onPressed: () => Navigator.of(context).pushNamed(ChooseLevelScreen.routeName),
                   child: const Text('Next'),
                 ),
               ),

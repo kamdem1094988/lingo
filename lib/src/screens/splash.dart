@@ -9,7 +9,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
+        child: SizedBox(
           width: double.infinity,
           height: double.infinity,
           child: Column(
@@ -18,7 +18,7 @@ class SplashScreen extends StatelessWidget {
             children: const [
               Text('Lingo', style: TextStyle(color: Colors.blue, fontSize: 40, fontWeight: FontWeight.bold),),
               SizedBox(height: 10,),
-              Text('The best way to learn Language',),
+              Text('The best way to learn any Language',),
               SizedBox(height: 30,),
               ElevatedButton(onPressed: null, child:Icon(Icons.navigate_next_outlined))
             ],

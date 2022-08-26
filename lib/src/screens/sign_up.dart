@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:lingo/src/screens/login.dart';
+import 'package:lingo/src/services/firestore_methods.dart';
+import 'package:provider/provider.dart';
+
+import '../services/firebase_auth_methods.dart';
 
 enum RememberQ { yes, no }
 
 class SignUpScreen extends StatefulWidget {
-  static const routeName = '/sign-up';
+  static const routeName = '/signup-email-password';
 
   const SignUpScreen({Key? key}) : super(key: key);
 
@@ -12,10 +17,22 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
+
+  RememberQ? _question = RememberQ.no;
+
+  void signUpUser() async {
+    context.read<FirebaseAuthMethods>().signUpWithEmail(
+      email: emailController.text,
+      password: passwordController.text,
+      context: context,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    RememberQ? _question = RememberQ.no;
-
     return Scaffold(
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(50),
@@ -24,7 +41,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(
-              height: 30,
+              height: 20,
             ),
             const Text(
               'Sign UP',
@@ -84,9 +101,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
             TextFormField(
               maxLines: 1,
               decoration: InputDecoration(
-                  hintText: 'Email',
+                  hintText: 'Username',
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10))),
+              controller: usernameController,
             ),
             const SizedBox(
               height: 10,
@@ -94,9 +112,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
             TextFormField(
               maxLines: 1,
               decoration: InputDecoration(
-                  hintText: 'Password',
+                  hintText: 'Enter your Email',
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10))),
+              controller: emailController,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            TextFormField(
+              maxLines: 1,
+              decoration: InputDecoration(
+                  hintText: 'Enter your Password',
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10))),
+              controller: passwordController,
             ),
             const SizedBox(
               height: 10,
@@ -122,7 +152,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   primary: Colors.blue,
                   padding: const EdgeInsets.all(5),
                 ),
-                onPressed: () {},
+                onPressed: signUpUser,
                 child: const Text('Sign Up'),
               ),
             ),
@@ -130,14 +160,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
               height: 10,
             ),
             Row(
-              children: const [
-                Text('Already have an account log In'),
-                SizedBox(
+              children: [
+                const Text('Already have an account log In'),
+                const SizedBox(
                   width: 10,
                 ),
-                Text(
-                  'Login',
-                  style: TextStyle(color: Colors.blue),
+                TextButton(
+                  onPressed: () => Navigator.of(context)
+                      .popAndPushNamed(LoginScreen.routeName),
+                  child: const Text(
+                    'Login',
+                    style: TextStyle(color: Colors.blue),
+                  ),
                 )
               ],
             ),

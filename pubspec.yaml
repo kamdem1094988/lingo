@@ -16,7 +16,6 @@ dependencies:
   get: ^4.6.5
   flutter_localizations:
     sdk: flutter
-
   cupertino_icons: ^1.0.2
   firebase_core: ^1.20.0
   firebase_auth: ^3.6.2
@@ -26,6 +25,12 @@ dependencies:
   provider: ^6.0.3
   path_provider: ^2.0.11
   string_validator: ^0.3.0
+  flutter_facebook_auth: ^4.1.2
+  google_sign_in: ^5.2.4
+  cloud_firestore: ^3.4.4
+  path: any
+  websafe_svg: ^2.1.2+3
+  flutter_svg: ^1.1.4
 
 dev_dependencies:
   flutter_test:
@@ -44,9 +49,9 @@ flutter:
     - assets/images/image1.png
     - assets/images/image2.png
     - assets/images/image3.png
-    - assets/images/
+    - assets/images/cashir.jpg
+    - assets/images/Robot.jpg
     - assets/svg/
-    - assets/flare/
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a

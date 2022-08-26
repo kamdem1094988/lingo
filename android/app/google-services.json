@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "567332270780-46t8hd054ubhuhkv34vkjoalnkvi1qj9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lingo.lingo",
+            "certificate_hash": "223e2962da63e4e40fd7236ab527e16559279ab7"
+          }
+        },
+        {
           "client_id": "567332270780-lbqlgc55o50jteepllg1bu3dvmmksq18.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -30,6 +38,13 @@
             {
               "client_id": "567332270780-lbqlgc55o50jteepllg1bu3dvmmksq18.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "567332270780-tofvsa74ufsvc9ie0l4vd682d6u5npib.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lingo.lingo"
+              }
             }
           ]
         }

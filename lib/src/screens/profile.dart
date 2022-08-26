@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lingo/src/screens/profile/edit_description.dart';
 import 'package:lingo/src/screens/profile/edit_email.dart';
@@ -7,24 +8,53 @@ import 'package:lingo/src/screens/profile/edit_image.dart';
 import 'package:lingo/src/screens/profile/edit_name.dart';
 import 'package:lingo/src/screens/profile/edit_phone.dart';
 
-import '../shared/constants/user_data.dart';
 import '../shared/widget/display_profile_image.dart';
-import '../models/user.dart';
+import '../models/users.dart';
 
 // This class handles the Page to dispaly the user's info on the "Edit Profile" Screen
 class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({Key? key}) : super(key: key);
+
   @override
-  _ProfileScreenState createState() => _ProfileScreenState();
+  ProfileScreenState createState() => ProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    final user = UserData.myUser;
+    // final user = UserData.myUser;
+    final user = FirebaseAuth.instance.currentUser;
+
+    var myData;
+
+    if (user != null) {
+      // Name, email address, and profile photo URL
+      final name = user.displayName;
+      final email = user.email;
+      final photoUrl = user.photoURL;
+
+      // Check if user's email is verified
+      final emailVerified = user.emailVerified;
+
+      // The user's ID, unique to the Firebase project. Do NOT use this value to
+      // authenticate with your backend server, if you have one. Use
+      // User.getIdToken() instead.
+      final uid = user.uid;
+
+      myData = Users(
+        email: email.toString(),
+        level: '',
+        profile_image: photoUrl.toString(),
+        username: name.toString(),
+        phone: user.phoneNumber.toString(),
+        aboutMeDescription: '',
+      );
+    }
 
     return Scaffold(
-      body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 30),
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
           children: [
             AppBar(
               backgroundColor: Colors.transparent,
@@ -47,18 +77,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   navigateSecondPage(const EditImagePage());
                 },
                 child: DisplayImage(
-                  imagePath: user.image,
+                  imagePath: user!.photoURL as String,
                   onPressed: () {},
                 )),
-            buildUserInfoDisplay(user.name, 'Name', const EditNameFormPage()),
-            buildUserInfoDisplay(user.phone, 'Phone', const EditPhoneFormPage()),
-            buildUserInfoDisplay(user.email, 'Email', const EditEmailFormPage()),
+            buildUserInfoDisplay(user.displayName.toString(), 'Name', const EditNameFormPage()),
+            buildUserInfoDisplay(user.phoneNumber.toString(), 'Phone', const EditPhoneFormPage()),
+            buildUserInfoDisplay(user.email.toString(), 'Email', const EditEmailFormPage()),
             Expanded(
               flex: 4,
-              child: buildAbout(user),
+              child: buildAbout(myData),
             )
           ],
         ),
+      ),
     );
   }
 
@@ -109,7 +140,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ));
 
   // Widget builds the About Me Section
-  Widget buildAbout(User user) => Padding(
+  Widget buildAbout(Users user) => Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -136,7 +167,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Expanded(
                     child: TextButton(
                         onPressed: () {
-                          navigateSecondPage(EditDescriptionFormPage());
+                          navigateSecondPage(const EditDescriptionFormPage());
                         },
                         child: Padding(
                             padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
