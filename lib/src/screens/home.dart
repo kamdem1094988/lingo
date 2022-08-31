@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:lingo/src/screens/quiz/quiz_screen.dart';
+import 'package:lingo/src/controller/travel_question_controller.dart';
+import 'package:lingo/src/screens/computer_quiz_screen.dart';
+import 'package:lingo/src/screens/nature_quiz_screen.dart';
+import 'package:lingo/src/screens/sport_quiz_screen.dart';
+import 'package:lingo/src/screens/travel_quiz_screen.dart';
 
 import '../shared/constants/images.dart';
 import '../shared/constants/stylings.dart';
@@ -15,10 +19,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
+  TravelQuestionController qnController = Get.put(TravelQuestionController());
   @override
   void initState() {
-    MySharedPreferences.instance.setBooleanValue("first_time", false); // set shared preference to already have open the once
+    MySharedPreferences.instance.setBooleanValue("first_time",
+        false); // set shared preference to already have open the once
+
+
     super.initState();
   }
 
@@ -57,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         color: Colors.black.withOpacity(.7)),
                               ),
                               Text(
-                                'Good Morning',
+                                'on Lingo space',
                                 style: Theme.of(context).textTheme.headline4,
                               ),
                             ]),
@@ -170,7 +177,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   )),
               Container(
                 padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
-                child: Text('Specialisations',
+                child: Text('Specializations',
                     style: Theme.of(context).textTheme.headline1),
               ),
               Container(
@@ -180,7 +187,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       InkWell(
-                        onTap: () => Get.to(QuizScreen()),
+                        onTap: () {
+                          Get.to(() => const TravelQuizScreen());
+                        },
                         child: Container(
                           padding: const EdgeInsets.all(15),
                           width: (Get.size.width / 2) - 30,
@@ -202,7 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: [
                               Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     '10',
@@ -210,8 +219,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         .textTheme
                                         .headline1!
                                         .copyWith(
-                                        color: AppTheme.white,
-                                        fontSize: 30),
+                                            color: AppTheme.white,
+                                            fontSize: 30),
                                   ),
                                   const Icon(
                                     Icons.directions_bus,
@@ -226,8 +235,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     .textTheme
                                     .headline3!
                                     .copyWith(
-                                  color: AppTheme.white,
-                                ),
+                                      color: AppTheme.white,
+                                    ),
                               ),
                               Text(
                                 'Answer ten questions on boats',
@@ -236,7 +245,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     .textTheme
                                     .headline4!
                                     .copyWith(
-                                    color: AppTheme.white, fontSize: 10),
+                                        color: AppTheme.white, fontSize: 10),
                                 maxLines: 2,
                               )
                             ],
@@ -245,7 +254,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       InkWell(
                         onTap: () {
-                          Get.to(QuizScreen());
+                          Get.to(() => const NatureQuizScreen());
                           // QuizAlerts().error('Opps...', 'Questions on bikes subject are unavailable', context);
                         },
                         child: Container(
@@ -266,7 +275,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: [
                               Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     '10',
@@ -274,8 +283,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         .textTheme
                                         .headline1!
                                         .copyWith(
-                                        color: AppTheme.white,
-                                        fontSize: 30),
+                                            color: AppTheme.white,
+                                            fontSize: 30),
                                   ),
                                   const Icon(
                                     Icons.emoji_nature,
@@ -290,8 +299,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     .textTheme
                                     .headline3!
                                     .copyWith(
-                                  color: AppTheme.white,
-                                ),
+                                      color: AppTheme.white,
+                                    ),
                               ),
                               Text(
                                 'Answer ten questions on boats',
@@ -300,7 +309,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     .textTheme
                                     .headline4!
                                     .copyWith(
-                                    color: AppTheme.white, fontSize: 10),
+                                        color: AppTheme.white, fontSize: 10),
                                 maxLines: 2,
                               )
                             ],
@@ -315,7 +324,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       InkWell(
                         onTap: () {
-                          Get.to(QuizScreen());
+                          Get.to(() => const SportQuizScreen());
                           // QuizAlerts().error('Opps...', 'Questions on bikes subject are unavailable', context);
                         },
                         child: Container(
@@ -379,7 +388,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       InkWell(
                         onTap: () {
-                          Get.to(QuizScreen());
+                          Get.to(() => const ComputerQuizScreen());
                           // QuizAlerts().error('Opps...', 'Questions on bikes subject are unavailable', context);
                         },
                         child: Container(
@@ -400,7 +409,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: [
                               Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     '10',
@@ -408,8 +417,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         .textTheme
                                         .headline1!
                                         .copyWith(
-                                        color: AppTheme.white,
-                                        fontSize: 30),
+                                            color: AppTheme.white,
+                                            fontSize: 30),
                                   ),
                                   const Icon(
                                     Icons.computer,
@@ -424,8 +433,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     .textTheme
                                     .headline3!
                                     .copyWith(
-                                  color: AppTheme.white,
-                                ),
+                                      color: AppTheme.white,
+                                    ),
                               ),
                               Text(
                                 'Answer ten questions on boats',
@@ -434,7 +443,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     .textTheme
                                     .headline4!
                                     .copyWith(
-                                    color: AppTheme.white, fontSize: 10),
+                                        color: AppTheme.white, fontSize: 10),
                                 maxLines: 2,
                               )
                             ],

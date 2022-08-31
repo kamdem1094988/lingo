@@ -19,29 +19,33 @@ class DisplayImage extends StatelessWidget {
 
     return Center(
         child: Stack(children: [
-          buildImage(color),
-          Positioned(
-            right: 4,
-            top: 10,
-            child: buildEditIcon(color),
-          )
-        ]));
+      buildImage(color),
+      Positioned(
+        right: 4,
+        top: 10,
+        child: buildEditIcon(color),
+      )
+    ]));
   }
 
   // Builds Profile Image
   Widget buildImage(Color color) {
-    final image = imagePath.contains('https://')
-        ? NetworkImage(imagePath)
-        : FileImage(File(imagePath));
+    // final image = imagePath.contains('https://')
+    //     ? NetworkImage(imagePath)
+    //     : FileImage(File(imagePath));
 
-    return CircleAvatar(
-      radius: 75,
-      backgroundColor: color,
-      child: CircleAvatar(
-        backgroundImage: image as ImageProvider,
-        radius: 70,
-      ),
-    );
+    final image = imagePath.contains('https://')
+        ? CircleAvatar(
+            backgroundImage: NetworkImage(imagePath),
+            radius: 70,
+          )
+        : CircleAvatar(
+            // backgroundImage: FileImage(File(imagePath)),
+            radius: 70,
+            child: Image.asset('assets/images/no-image.png'),
+          );
+
+    return CircleAvatar(radius: 75, backgroundColor: color, child: image);
   }
 
   // Builds Edit Icon on Profile Picture
@@ -60,8 +64,8 @@ class DisplayImage extends StatelessWidget {
   }) =>
       ClipOval(
           child: Container(
-            padding: EdgeInsets.all(all),
-            color: Colors.white,
-            child: child,
-          ));
+        padding: EdgeInsets.all(all),
+        color: Colors.white,
+        child: child,
+      ));
 }

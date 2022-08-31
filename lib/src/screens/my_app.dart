@@ -9,6 +9,7 @@ import 'board.dart';
 import 'home.dart';
 
 class MyAppPages extends StatefulWidget {
+  static const routeName = '/my-app';
   const MyAppPages({Key? key}) : super(key: key);
 
   @override
@@ -27,15 +28,15 @@ class _MyAppPagesState extends State<MyAppPages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Lingo'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications),
-            onPressed: () {},
-          ),
-        ],
-      ),
+      // appBar: AppBar(
+      //   title: const Text('Lingo'),
+      //   actions: [
+      //     IconButton(
+      //       icon: const Icon(Icons.notifications),
+      //       onPressed: () {},
+      //     ),
+      //   ],
+      // ),
       bottomNavigationBar: SalomonBottomBar(
         currentIndex: _currentIndex,
         onTap: (i) => _onItemTapped(i),

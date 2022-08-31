@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:lingo/src/controller/nature_question_controller.dart';
+import 'package:lingo/src/controller/sport_question_controller.dart';
+import 'package:lingo/src/controller/travel_question_controller.dart';
+
+import '../../controller/computer_question_controller.dart';
 // import 'package:provider/provider.dart';
 // import 'package:quizzapp/services/models.dart';
 
@@ -61,9 +67,10 @@ class AnimatedProgressbar extends StatelessWidget {
 
 class TopicProgress extends StatelessWidget {
   // final Topic topic;
+  final String spec;
 
   // const TopicProgress({Key? key, required this.topic}) : super(key: key);
-  const TopicProgress({Key? key}) : super(key: key);
+  const TopicProgress({required this.spec});
 
   @override
   Widget build(BuildContext context) {
@@ -85,13 +92,41 @@ class TopicProgress extends StatelessWidget {
 
   // Widget _progressCount(Report report, Topic topic) {
   Widget _progressCount() {
-    return const Padding(
-      padding: EdgeInsets.only(left: 8),
-      child: Text(
-        // '${report.topics[topic.id]?.length ?? 0} / ${topic.quizzes.length}',
-        '4 / 2',
-        style: TextStyle(fontSize: 10, color: Colors.grey),
-      ),
+    ComputerQuestionController computerQuestionController = Get.put(ComputerQuestionController());
+    NatureQuestionController natureQuestionController = Get.put(NatureQuestionController());
+    SportQuestionController sportQuestionController = Get.put(SportQuestionController());
+    TravelQuestionController travelQuestionController = Get.put(TravelQuestionController());
+
+    Text text = const Text('');
+
+    if (spec=='travel'){
+      text = Text(
+        '${travelQuestionController.questionNumber.value} / ${travelQuestionController.questions.length}',
+        style: const TextStyle(fontSize: 10, color: Colors.grey),
+      );
+    }else if(spec=='sport'){
+      text = Text(
+        '${sportQuestionController.questionNumber.value} / ${sportQuestionController.questions.length}',
+        style: const TextStyle(fontSize: 10, color: Colors.grey),
+      );
+    }else if(spec=='nature'){
+      text = Text(
+        '${natureQuestionController.questionNumber.value} / ${natureQuestionController.questions.length}',
+        style: const TextStyle(fontSize: 10, color: Colors.grey),
+      );
+    }else if(spec=='computer'){
+      text = Text(
+        '${computerQuestionController.questionNumber.value} / ${computerQuestionController.questions.length}',
+        style: const TextStyle(fontSize: 10, color: Colors.grey),
+      );
+    }
+
+
+    // questionController.questionNumber.value
+    // questionController.questionNumber.length
+    return Padding(
+      padding: const EdgeInsets.only(left: 8),
+      child: text,
     );
   }
 

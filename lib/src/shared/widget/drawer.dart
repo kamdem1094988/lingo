@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../screens/choose_lang.dart';
-import '../../screens/choose_level.dart';
-import '../../screens/choose_spec.dart';
 import '../../services/firebase_auth_methods.dart';
 
 class CustomDrawer extends StatefulWidget {
@@ -41,7 +39,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
           ),
           const Spacer(),
           ListTile(
-            title: const Text('Lingo App By Lingo CORP'),
+            title: const Text('Logout'),
             trailing: IconButton(
                 onPressed: () {
                   setState(() {

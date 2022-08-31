@@ -4,10 +4,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lingo/src/screens/profile/edit_description.dart';
 import 'package:lingo/src/screens/profile/edit_email.dart';
-import 'package:lingo/src/screens/profile/edit_image.dart';
 import 'package:lingo/src/screens/profile/edit_name.dart';
 import 'package:lingo/src/screens/profile/edit_phone.dart';
+import 'package:lingo/src/services/firestore_methods.dart';
+import 'package:provider/provider.dart';
 
+import '../services/firebase_auth_methods.dart';
+import '../shared/constants/stylings.dart';
 import '../shared/widget/display_profile_image.dart';
 import '../models/users.dart';
 
@@ -20,12 +23,38 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class ProfileScreenState extends State<ProfileScreen> {
+  Map myData = {
+    "profile_image": "",
+    "phone": "",
+    "level": "",
+    "email": "",
+    "username": ""
+  };
+  final user = FirebaseAuth.instance.currentUser;
+
+  _getData() async {
+    myData = await context
+        .read<FirestoreMethods>()
+        .getUserInfoFromDB(uid: user!.uid);
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    _getData();
+    super.initState();
+  }
+
+  void signOut() async {
+    context.read<FirebaseAuthMethods>().signOut(context);
+  }
+
+
   @override
   Widget build(BuildContext context) {
     // final user = UserData.myUser;
     final user = FirebaseAuth.instance.currentUser;
-
-    var myData;
+    var myUser;
 
     if (user != null) {
       // Name, email address, and profile photo URL
@@ -41,7 +70,7 @@ class ProfileScreenState extends State<ProfileScreen> {
       // User.getIdToken() instead.
       final uid = user.uid;
 
-      myData = Users(
+      myUser = Users(
         email: email.toString(),
         level: '',
         profile_image: photoUrl.toString(),
@@ -52,6 +81,48 @@ class ProfileScreenState extends State<ProfileScreen> {
     }
 
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(50.0),
+        child: Container(
+          padding: EdgeInsets.only(
+              top: MediaQuery.of(context).viewPadding.top,
+              left: 30,
+              right: 30),
+          height: 120,
+          decoration: const BoxDecoration(
+            color: AppTheme.white,
+          ),
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline1!
+                            .copyWith(
+                            color: Colors.black.withOpacity(.7)),
+                      ),
+                      Text(
+                        '',
+                        style: Theme.of(context).textTheme.headline4,
+                      ),
+                    ]),
+                InkWell(
+                  onTap: () => signOut(),
+                  child: Row(children: const [
+                    Text('Logout'),
+                    SizedBox(width: 8.0,),
+                    Icon(Icons.logout),
+                  ],)
+                ),
+              ]),
+        ),
+      ),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -74,19 +145,24 @@ class ProfileScreenState extends State<ProfileScreen> {
                     ))),
             InkWell(
                 onTap: () {
-                  navigateSecondPage(const EditImagePage());
+                  // navigateSecondPage(const EditImagePage());
                 },
                 child: DisplayImage(
-                  imagePath: user!.photoURL as String,
-                  onPressed: () {},
+                  // imagePath: user!.photoURL as String,
+                  imagePath: myData['profile_image'] != '' ? myData['profile_image'] : 'assets/images/no-image.png',
+                  onPressed: () {
+
+                  },
                 )),
-            buildUserInfoDisplay(user.displayName.toString(), 'Name', const EditNameFormPage()),
-            buildUserInfoDisplay(user.phoneNumber.toString(), 'Phone', const EditPhoneFormPage()),
-            buildUserInfoDisplay(user.email.toString(), 'Email', const EditEmailFormPage()),
-            Expanded(
-              flex: 4,
-              child: buildAbout(myData),
-            )
+            buildUserInfoDisplay(
+                myData['username'], 'Name', const EditNameFormPage()),
+            buildUserInfoDisplay(
+                myData['phone'], 'Phone', const EditPhoneFormPage()),
+            buildUserInfoDisplay(
+                myData['email'], 'Email', const EditEmailFormPage()),
+            // buildUserInfoDisplay(
+            //     user!.email.toString(), 'Email', const EditEmailFormPage()),
+            buildAbout(myUser),
           ],
         ),
       ),
@@ -146,7 +222,7 @@ class ProfileScreenState extends State<ProfileScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'Tell Us About Yourself',
+            'Description',
             style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w500,
@@ -173,13 +249,14 @@ class ProfileScreenState extends State<ProfileScreen> {
                             padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
                             child: Align(
                                 alignment: Alignment.topLeft,
-                                child: Text(
-                                  user.aboutMeDescription,
+                                child: myData['description'] == null ? const CircularProgressIndicator(): Text(
+                                  myData['description'] ,
                                   style: const TextStyle(
                                     fontSize: 16,
                                     height: 1.4,
                                   ),
-                                ))))),
+                                )
+                            )))),
                 const Icon(
                   Icons.keyboard_arrow_right,
                   color: Colors.grey,

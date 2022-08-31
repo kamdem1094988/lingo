@@ -31,6 +31,8 @@ dependencies:
   path: any
   websafe_svg: ^2.1.2+3
   flutter_svg: ^1.1.4
+  firebase_storage: ^10.3.7
+  video_player: ^2.4.7
 
 dev_dependencies:
   flutter_test:
@@ -51,6 +53,12 @@ flutter:
     - assets/images/image3.png
     - assets/images/cashir.jpg
     - assets/images/Robot.jpg
+    - assets/images/profile.png
+    - assets/images/no-image.png
+    - assets/images/Nature21.jpg
+    - assets/images/sport_spec.jpg
+    - assets/images/travel21.jpg
+    - assets/images/computer20.jpg
     - assets/svg/
 
   # To add custom fonts to your application, add a fonts section here,

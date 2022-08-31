@@ -1,12 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lingo/src/services/firebase_auth_methods.dart';
 import 'package:provider/provider.dart';
 import 'package:string_validator/string_validator.dart';
 
 import '../../services/firestore_methods.dart';
-import '../../shared/constants/user_data.dart';
 import '../../shared/widget/appbar.dart';
 
 // This class handles the Page to edit the Name Section of the User Profile.
@@ -32,17 +29,9 @@ class EditNameFormPageState extends State<EditNameFormPage> {
     super.dispose();
   }
 
-  @override
-  void initState() {
-    final uid = context.read<FirebaseAuthMethods>().user.uid;
-    print('-------------> $uid');
-    super.initState();
-  }
-
   void updateUserValue(String name) async{
     final uid = context.read<FirebaseAuthMethods>().user.uid;
-    print('-------------> $uid');
-    context.read<FirestoreMethods>().updateUserInfo(name: name, uid: uid);
+    context.read<FirestoreMethods>().updateUserName(name: name, uid: uid);
   }
 
   @override
@@ -123,7 +112,6 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                                 if (_formKey.currentState!.validate() &&
                                     isAlpha(firstNameController.text +
                                         secondNameController.text)) {
-                                  print('-----------------_____> ${firstNameController.text} ${secondNameController.text}');
                                   updateUserValue("${firstNameController.text} ${secondNameController.text}");
                                   Navigator.pop(context);
                                 }

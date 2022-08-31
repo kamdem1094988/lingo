@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../shared/constants/stylings.dart';
 import '../shared/widget/progress_bar.dart';
 
 class BoardScreen extends StatefulWidget {
@@ -13,6 +14,17 @@ class _BoardScreenState extends State<BoardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(8.0),
+        child: Container(
+          padding: EdgeInsets.only(
+              top: MediaQuery.of(context).viewPadding.top, left: 30, right: 30),
+          height: 120,
+          decoration: const BoxDecoration(
+            color: AppTheme.white,
+          ),
+        ),
+      ),
       body: GridView(
         padding: const EdgeInsets.all(8),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -41,7 +53,7 @@ class _BoardScreenState extends State<BoardScreen> {
                       flex: 3,
                       child: SizedBox(
                         child: Image.asset(
-                          'assets/images/Robot.jpg',
+                          'assets/images/travel21.jpg',
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -50,7 +62,7 @@ class _BoardScreenState extends State<BoardScreen> {
                       child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 10),
                           child: Text(
-                            'Technologie',
+                            'Travel',
                             style: TextStyle(
                               height: 1.5,
                               fontWeight: FontWeight.bold,
@@ -59,7 +71,7 @@ class _BoardScreenState extends State<BoardScreen> {
                             softWrap: false,
                           )),
                     ),
-                    const Flexible(child: TopicProgress()),
+                    Flexible(child: TopicProgress(spec: 'travel')),
                   ],
                 ),
               ),
@@ -85,7 +97,7 @@ class _BoardScreenState extends State<BoardScreen> {
                       flex: 3,
                       child: SizedBox(
                         child: Image.asset(
-                          'assets/images/Robot.jpg',
+                          'assets/images/Nature21.jpg',
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -94,7 +106,7 @@ class _BoardScreenState extends State<BoardScreen> {
                       child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 10),
                           child: Text(
-                            'Technologie',
+                            'Nature',
                             style: TextStyle(
                               height: 1.5,
                               fontWeight: FontWeight.bold,
@@ -103,7 +115,7 @@ class _BoardScreenState extends State<BoardScreen> {
                             softWrap: false,
                           )),
                     ),
-                    const Flexible(child: TopicProgress()),
+                    Flexible(child: TopicProgress(spec: 'nature')),
                   ],
                 ),
               ),
@@ -129,7 +141,7 @@ class _BoardScreenState extends State<BoardScreen> {
                       flex: 3,
                       child: SizedBox(
                         child: Image.asset(
-                          'assets/images/Robot.jpg',
+                          'assets/images/sport_spec.jpg',
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -138,7 +150,7 @@ class _BoardScreenState extends State<BoardScreen> {
                       child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 10),
                           child: Text(
-                            'Technologie',
+                            'Sport',
                             style: TextStyle(
                               height: 1.5,
                               fontWeight: FontWeight.bold,
@@ -147,7 +159,7 @@ class _BoardScreenState extends State<BoardScreen> {
                             softWrap: false,
                           )),
                     ),
-                    const Flexible(child: TopicProgress()),
+                    Flexible(child: TopicProgress(spec: 'sport')),
                   ],
                 ),
               ),
@@ -173,7 +185,7 @@ class _BoardScreenState extends State<BoardScreen> {
                       flex: 3,
                       child: SizedBox(
                         child: Image.asset(
-                          'assets/images/Robot.jpg',
+                          'assets/images/computer20.jpg',
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -182,7 +194,7 @@ class _BoardScreenState extends State<BoardScreen> {
                       child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 10),
                           child: Text(
-                            'Technologie',
+                            'Computer',
                             style: TextStyle(
                               height: 1.5,
                               fontWeight: FontWeight.bold,
@@ -191,7 +203,7 @@ class _BoardScreenState extends State<BoardScreen> {
                             softWrap: false,
                           )),
                     ),
-                    const Flexible(child: TopicProgress()),
+                    Flexible(child: TopicProgress(spec: 'computer')),
                   ],
                 ),
               ),

@@ -76,6 +76,7 @@ class MyApp extends StatelessWidget {
           ChooseSpecialisationScreen.routeName: (ctx) =>
               const ChooseSpecialisationScreen(),
           HomeScreen.routeName: (ctx) => const HomeScreen(),
+          MyAppPages.routeName: (ctx) => const MyAppPages(),
         },
       ),
     );
@@ -97,8 +98,8 @@ class _AuthWrapperState extends State<AuthWrapper> {
 
   @override
   void initState() {
-
-    Future.delayed(const Duration(seconds: 3), () {
+    FirestoreMethods.getSpecialization();
+    Future.delayed(const Duration(seconds: 5), () {
       setState(() {
         isSplash = false;
       });
