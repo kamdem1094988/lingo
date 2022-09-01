@@ -28,14 +28,12 @@ class _CustomDrawerState extends State<CustomDrawer> {
           ListTile(
             leading: const Icon(Icons.backup),
             title: const Text('Backup'),
-            onTap: () =>
-                Navigator.of(context).pushNamed(ChooseLanguageScreen.routeName),
+            onTap: () => {},
           ),
           ListTile(
             leading: const Icon(Icons.remove_red_eye),
             title: const Text('Revisions'),
-            onTap: () =>
-                Navigator.of(context).pushNamed(ChooseLanguageScreen.routeName),
+            onTap: () => {}
           ),
           const Spacer(),
           ListTile(

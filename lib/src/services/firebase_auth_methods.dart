@@ -20,6 +20,7 @@ class FirebaseAuthMethods {
   // when the user is logged in
   User get user => _auth.currentUser!;
 
+
   // STATE PERSISTENCE STREAM
   Stream<User?> get authState => FirebaseAuth.instance.authStateChanges();
   // OTHER WAYS (depends on use case):

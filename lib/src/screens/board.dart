@@ -15,7 +15,7 @@ class _BoardScreenState extends State<BoardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(8.0),
+        preferredSize: const Size.fromHeight(18.0),
         child: Container(
           padding: EdgeInsets.only(
               top: MediaQuery.of(context).viewPadding.top, left: 30, right: 30),

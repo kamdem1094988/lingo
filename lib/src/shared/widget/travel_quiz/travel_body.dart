@@ -59,8 +59,8 @@ class TravelBody extends StatelessWidget {
               Expanded(
                 child: PageView.builder(
                   // Block swipe to next qn
-                  physics: const NeverScrollableScrollPhysics(),
-                  // physics: const AlwaysScrollableScrollPhysics(),
+                  // physics: const NeverScrollableScrollPhysics(),
+                  physics: const AlwaysScrollableScrollPhysics(),
                   controller: questionController.pageController,
                   onPageChanged: questionController.updateTheQnNum,
                   itemCount: questionController.questions.length,
